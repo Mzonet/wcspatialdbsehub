@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Uploading Splash Screen</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #1e1e1e; /* Dark grey background */
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      background-color: cyan;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 90%;
+      transition: transform 0.3s ease;
+      animation: bounceIn 1s ease;
+    }
+
+    .logo {
+      width: 200px;
+      height: 200px;
+      margin: 0 auto 20px auto;
+      background-image: url('<img src="images/NDPIMG.png" alt="A beautiful scenery" />'); /* Replace with your image */
+
+
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      border-radius: 50%;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .container h1 {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .progress-bar-background {
+      width: 100%;
+      height: 12px;
+      background-color: #e0e0e0;
+      border-radius: 50px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #4CAF50, #66BB6A);
+      border-radius: 50px;
+      transition: width 0.4s ease;
+    }
+
+    .status-text {
+      font-size: 18px;
+      font-weight: 500;
+      margin-top: 20px;
+      color: #4CAF50;
+    }
+
+    .footer-text {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #888;
+    }
+
+    @keyframes bounceIn {
+      0% {
+        transform: scale(0.9);
+        opacity: 0;
+      }
+      60% {
+        transform: scale(1.05);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    /* Responsive Image */
+    @media (max-width: 480px) {
+      .logo {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 15px;
+      }
+
+      .container h1 {
+        font-size: 24px;
+        margin-bottom: 15px;
+      }
+
+      .status-text {
+        font-size: 16px;
+        margin-top: 15px;
+      }
+
+      .footer-text {
+        font-size: 12px;
+        margin-top: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo"></div>
+    <h1>Welcome to Western Cape Geodatabase</h1>
+    <div class="progress-bar-background">
+      <div class="progress-bar-fill" id="progressBar"></div>
+    </div>
+    <div class="status-text" id="statusText">1%</div>
+    <div class="footer-text">Initialization and Data Synchronization...</div>
+<br>
+    <div class="footer-text"><i>Credits Western Cape Geography(C)2024</i></div>
+</br>
+  </div>
+
+  <script>
+    let progress = 1;
+    const progressBar = document.getElementById('progressBar');
+    const statusText = document.getElementById('statusText');
+
+    // Function to speak text
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'en-US'; // Set language
+      window.speechSynthesis.speak(utterance);
+    }
+
+    // Text explaining the importance of hotspot density analysis and heat maps
+    const explanationText = "Hotspot density analysis and heat maps are vital tools for understanding data distribution. They allow us to visualize patterns and trends, making it easier to identify areas of high activity. By analyzing this data, organizations can make informed decisions, allocate resources efficiently, and improve overall performance.";
+
+    // Speak the explanation when the page loads
+    window.onload = function() {
+      speak(explanationText);
+      updateProgress();
+    };
+
+    function updateProgress() {
+      if (progress <= 100) {
+        progressBar.style.width = progress + '%';
+        statusText.innerText = progress + '%';
+        progress++;
+        setTimeout(updateProgress, 90); // Adjust speed of progress
+      } else {
+        window.location.href = 'Login.html'; // Redirect after 100%
+      }
+    }
+  </script>
+</body>
+</html>

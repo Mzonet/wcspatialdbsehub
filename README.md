@@ -1,2 +1,2 @@
-# wcspatialdbsehub
-Geodatabase application development
+# WCHotspotAnalysis
+Density HeatMap
